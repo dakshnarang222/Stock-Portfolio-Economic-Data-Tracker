@@ -1,0 +1,28 @@
+-- Phase 3: Advanced Portfolio Analytics 
+-- Calculates daily net cash flow and a rolling cumulative portfolio balance, 
+-- bridged with monthly macroeconomic indicators.
+
+WITH Daily_Cashflow AS (
+    SELECT 
+        trade_date,
+        SUM(CASE WHEN action = 'SELL' THEN total_value ELSE -total_value END) AS daily_net_cash
+    FROM portfolio_trades
+    GROUP BY trade_date
+),
+Running_Balance AS (
+    SELECT 
+        trade_date,
+        daily_net_cash,
+        SUM(daily_net_cash) OVER (ORDER BY trade_date) AS cumulative_portfolio_balance
+    FROM Daily_Cashflow
+)
+SELECT 
+    r.trade_date,
+    r.daily_net_cash,
+    r.cumulative_portfolio_balance,
+    m.fed_funds_rate,
+    m.cpi_yoy AS inflation_rate
+FROM Running_Balance r
+LEFT JOIN macro_indicators m 
+    ON DATE_TRUNC('month', r.trade_date) = m.record_date
+ORDER BY r.trade_date;

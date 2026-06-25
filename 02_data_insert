@@ -1,0 +1,27 @@
+-- Insert Macro Data (Simulated Q1/Q2)
+INSERT INTO macro_indicators (record_date, cpi_yoy, fed_funds_rate, gdp_growth)
+VALUES 
+    ('2026-01-01', 3.10, 5.25, 2.1),
+    ('2026-02-01', 3.20, 5.25, 2.0),
+    ('2026-03-01', 3.00, 5.00, 1.8),
+    ('2026-04-01', 2.80, 5.00, 1.9);
+
+-- Insert Portfolio Trades (SPY Debit and Credit Spreads)
+INSERT INTO portfolio_trades (trade_date, ticker, action, strategy, quantity, price, total_value)
+VALUES 
+    ('2026-01-15', 'SPY', 'BUY', 'Debit Spread', 10, 2.50, 2500.00),
+    ('2026-01-28', 'SPY', 'SELL', 'Credit Spread', 15, 1.10, 1650.00),
+    ('2026-02-12', 'SPY', 'BUY', 'Debit Spread', 20, 3.00, 6000.00),
+    ('2026-03-05', 'SPY', 'SELL', 'Credit Spread', 25, 1.50, 3750.00),
+    ('2026-03-20', 'SPY', 'BUY', 'Debit Spread', 15, 2.80, 4200.00),
+    ('2026-04-10', 'SPY', 'SELL', 'Credit Spread', 30, 0.90, 2700.00);
+
+-- Insert Daily Market Prices for SPY
+INSERT INTO market_prices (price_date, ticker, close_price, volume)
+VALUES 
+    ('2026-01-15', 'SPY', 475.20, 85000000),
+    ('2026-01-28', 'SPY', 480.10, 92000000),
+    ('2026-02-12', 'SPY', 478.50, 78000000),
+    ('2026-03-05', 'SPY', 485.30, 105000000),
+    ('2026-03-20', 'SPY', 490.15, 112000000),
+    ('2026-04-10', 'SPY', 488.90, 95000000);
